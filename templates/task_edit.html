@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="columns">
+        <div class="column is-8 is-offset-2">
+            <h1 class="title">Edit Task</h1>
+            <div class="box">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button type="submit" class="button is-primary">Simpan {{ submit_button_text }}</button>
+                        </div>
+                        <div class="control">
+                            <a href="{% url 'task_list' %}" class="button is-light">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

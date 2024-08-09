@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00d1b2">
+    <meta name="description" content="Konoha CRM System">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Konoha CRM">
+    {% load static %}
+    <link rel="manifest" href="{% static 'manifest.json' %}"> 
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon.png' %}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet">
+
+    <title>Konoha CRM</title>
+
+    <style>
+        /* Tema Gelap */
+        body {
+            background-color: #cf3939; /* Latar belakang gelap */
+            color: #f3b6b6; /* Teks terang */
+            font-family: 'Anonymous Pro', monospace;
+        }
+
+        .navbar {
+            background-color: #0ea875; /* Navbar gelap */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Bayangan yang lebih tegas */
+        }
+
+        .navbar-item, .navbar-link {
+            color: #0d6d45; /* Teks terang di navbar */
+        }
+
+        .navbar-item:hover, .navbar-link:hover {
+            background-color: #444; /* Efek hover yang lebih halus */
+            color: #11e2c3; /* Warna aksen saat hover */
+        }
+
+        .navbar-dropdown {
+            background-color: #b43232; /* Dropdown gelap */
+        }
+
+        .navbar-dropdown .navbar-item {
+            color: #05c082; /* Teks terang di dropdown */
+        }
+
+        .navbar-dropdown .navbar-item:hover {
+            background-color: #444; /* Efek hover yang lebih halus di dropdown */
+            color: #00d1b2; /* Warna aksen saat hover di dropdown */
+        }
+
+        /* Sentuhan Tambahan */
+        .button.is-primary {
+            background-color: #00d1b2; /* Warna aksen untuk tombol primer */
+            border-color: transparent;
+        }
+
+        .button.is-primary:hover {
+            background-color: #00c0a2; /* Efek hover yang lebih gelap */
+        }
+
+        .hero {
+            background-color: #b6a8a8; /* Hero section gelap */
+        }
+
+        .footer {
+            background-color: #222; /* Footer gelap */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'index' %}">
+                <img src="{% static 'images/favicon.png' %}" alt="Konoha Logo" style="max-height: 3rem;">
+            </a>
+            <span class="navbar-burger burger" data-target="navbarMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </div>
+
+        <div id="navbarMenu" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'index' %}">Home</a>
+                
+                {% if user.is_authenticated %}
+                    <a class="navbar-item" href="{% url 'dashboard' %}">Dashboard</a>
+                    <a class="navbar-item" href="{% url 'deal_list' %}">Deals</a>
+                    <a class="navbar-item" href="{% url 'customer_list' %}">Customers</a>
+                    <a class="navbar-item" href="{% url 'lead_list' %}">Leads</a>
+                    <a class="navbar-item" href="{% url 'report_list' %}">Reports</a>
+                    <a class="navbar-item" href="{% url 'email_template_list' %}">Email Templates</a>
+                    <a class="navbar-item" href="{% url 'notification_list' %}">Notifications</a>
+                    <a class="navbar-item" href="{% url 'task_list' %}">Tasks</a>
+                {% endif %}
+            </div>
+
+            <div class="navbar-end">
+                {% if user.is_authenticated %}
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">{{ user.username }}</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="{% url 'profile' %}">Profile</a>
+                        <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+                {% else %}
+                <a class="navbar-item" href="{% url 'login' %}">Login</a>
+                <a class="navbar-item" href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <a href="{% url 'help' %}" style="color: #ffffff; text-decoration: none; margin: 0 1rem; font-size: 0.9rem;">Help</a>
+                <a href="{% url 'privacy' %}" style="color: #ffffff; text-decoration: none; margin: 0 1rem; font-size: 0.9rem;">Privacy Policy</a>
+                <a href="{% url 'terms' %}" style="color: #ffffff; text-decoration: none; margin: 0 1rem; font-size: 0.9rem;">Terms of Service</a>
+            </p>
+            <p>&copy; 2024 My App. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burger = document.querySelector('.navbar-burger');
+            const menu = document.querySelector('#navbarMenu');
+
+            if (burger) {
+                burger.addEventListener('click', () => {
+                    burger.classList.toggle('is-active');
+                    menu.classList.toggle('is-active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

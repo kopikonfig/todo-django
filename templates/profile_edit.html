@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="padding: 20px; background-color: #f9f9f9; min-height: 100vh; color: #333;">
+    <div style="max-width: 800px; margin: auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+
+        <header style="margin-bottom: 20px;">
+            <h1 style="font-size: 2rem; color: #333;">Edit Profile</h1>
+        </header>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" style="background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer;">Save Changes</button>
+        </form>
+
+        <a href="{% url 'change_password' %}" style="display: block; margin-top: 20px; color: #007bff; text-decoration: none;">Change Password</a>
+
+    </div>
+</div>
+{% endblock %}

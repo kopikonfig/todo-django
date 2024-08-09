@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="section">
+    <div class="container">
+        <h1 class="title has-text-centered">Welcome to Konoha CRM</h1>
+        <p class="subtitle has-text-centered">
+            Manage your deals, customers, leads, tasks, and more with ease.
+        </p>
+<!-- 
+        <div class="columns is-centered">
+            <div class="column is-one-third">
+                <div class="box">
+                    <h2 class="title is-4">Quick Access</h2>
+                    <ul>
+                        <li><a href="{% url 'deal_list' %}" class="button is-link is-fullwidth">View Deals</a></li>
+                        <li><a href="{% url 'customer_list' %}" class="button is-link is-fullwidth">View Customers</a></li>
+                        <li><a href="{% url 'lead_list' %}" class="button is-link is-fullwidth">View Leads</a></li>
+                        <li><a href="{% url 'report_list' %}" class="button is-link is-fullwidth">View Reports</a></li>
+                        <li><a href="{% url 'task_list' %}" class="button is-link is-fullwidth">View Tasks</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="notification is-primary has-text-centered animated">
+            <strong>New Features!</strong> Check out our latest updates and enhancements.
+        </div>
+    </div>
+</div>
+{% endblock %}

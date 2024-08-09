@@ -1,0 +1,18 @@
+<!-- task_confirm_delete.html -->
+{% extends 'base.html' %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="title">Confirm Delete</h1>
+
+    <form method="post" class="box">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ task.title }}"?</p>
+
+        <button type="submit" class="button is-danger">Confirm</button>
+        <a href="{% url 'task_list' %}" class="button is-light">Cancel</a>
+    </form>
+</div>
+{% endblock %}

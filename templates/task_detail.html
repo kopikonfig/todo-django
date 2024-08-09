@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Task Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="title">{{ task.title }}</h1>
+    <div class="box">
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <p><strong>Due Date:</strong> {{ task.due_date }}</p>
+        <p><strong>Status:</strong> {{ task.get_status_display }}</p>
+        <p><strong>Assigned To:</strong> {{ task.assigned_to }}</p>
+        <p><strong>Created At:</strong> {{ task.created_at }}</p>
+        <p><strong>Updated At:</strong> {{ task.updated_at }}</p>
+    </div>
+    <a href="{% url 'task_edit' task.pk %}" class="button is-warning">Edit</a>
+    <a href="{% url 'task_delete' task.pk %}" class="button is-danger">Delete</a>
+    <a href="{% url 'task_list' %}" class="button is-light">Back to Task List</a>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Task List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="columns">
+        <div class="column is-12">
+            <h1 class="title">Task List</h1>
+            <div class="box">
+                <!-- Link to Task Management -->
+                <a href="{% url 'task_list' %}" class="button is-primary is-large mb-4">Back to List</a>
+                <div class="content">
+                    <div class="columns is-multiline">
+                        {% for task in tasks %}
+                        <div class="column is-12-mobile is-6-tablet is-4-desktop">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content">
+                                            <p class="title is-4">{{ task.title }}</p>
+                                            <p class="subtitle is-6">{{ task.due_date|date:"d M Y" }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <p>{{ task.description|slice:":100" }}{% if task.description|length > 100 %}...{% endif %}</p>
+                                        <div class="tags">
+                                            <span class="tag is-info">{{ task.get_status_display }}</span>
+                                            <span class="tag is-light">Assigned to: {{ task.assigned_to.username }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="card-footer">
+                                    <a href="{% url 'task_detail' task.pk %}" class="card-footer-item">View Details</a>
+                                </footer>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="column is-full">
+                            <div class="notification is-info">
+                                No tasks available.
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

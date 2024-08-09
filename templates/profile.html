@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div style="padding: 20px; background-color: #f9f9f9; min-height: 100vh; color: #333;">
+    <div style="max-width: 800px; margin: auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+
+        <header style="margin-bottom: 20px;">
+            <h1 style="font-size: 2rem; color: #333;">Profile</h1>
+        </header>
+
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <img src="{% if userprofile.profile_picture %}{{ userprofile.profile_picture.url }}{% else %}{% static 'default_profile_pic.png' %}{% endif %}" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; margin-right: 20px;">
+            <div>
+                <h2 style="font-size: 1.5rem; color: #333;">{{ userprofile.full_name }}</h2>
+                <p style="font-size: 1rem; color: #666;">Username: {{ userprofile.user.username }}</p>
+                <p style="font-size: 1rem; color: #666;">Phone Number: {{ userprofile.phone_number }}</p>
+                <p style="font-size: 1rem; color: #666;">Email: {{ userprofile.user.email }}</p>
+            </div>
+        </div>
+
+        <a href="{% url 'edit_profile' %}" style="background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none;">Edit Profile</a>
+    </div>
+</div>
+{% endblock %}

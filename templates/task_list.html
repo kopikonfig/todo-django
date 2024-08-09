@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Task List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="columns">
+        <div class="column is-12">
+            <h1 class="title">Task List</h1>
+            
+            <!-- Navigation Links -->
+            <!-- Breadcrumb Navigation -->
+            <nav class="breadcrumb has-background-light" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="{% url 'task_management' %}">Task Management</a></li> 
+                </ul>
+            </nav>
+            
+            <div class="box">
+                <div class="columns is-mobile is-multiline">
+                    {% for task in tasks %}
+                    <div class="column is-12-mobile is-6-tablet is-4-desktop">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4">{{ task.title }}</p>
+                                        <p class="subtitle is-6">{{ task.get_status_display }}</p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    {{ task.description|slice:":100" }}{% if task.description|length > 100 %}...{% endif %}
+                                    <br>
+                                    <strong>Due Date:</strong> {{ task.due_date|date:"d M Y H:i" }}
+                                    <br>
+                                    <strong>Assigned To:</strong> {{ task.assigned_to.username }}
+                                    <br>
+                                    <a href="{% url 'task_detail' task.pk %}" class="button is-info mt-3">View Details</a>
+                                    <a href="{% url 'task_edit' task.pk %}" class="button is-warning mt-3">Edit</a>
+                                    <a href="{% url 'task_delete' task.pk %}" class="button is-danger mt-3">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="column">
+                        <div class="notification is-info">
+                            No tasks available.
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a href="{% url 'task_create' %}" class="button is-primary is-large mt-4">Create New Task</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
