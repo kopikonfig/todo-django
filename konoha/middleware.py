@@ -10,6 +10,7 @@ class AuthenticationMiddleware(MiddlewareMixin):
             '/logout/',
             '/help/',
             '/privacy/',
+            '/admin/login/',
             '/terms/',
             '/',
         ]
@@ -29,6 +30,7 @@ class AuthenticationMiddleware(MiddlewareMixin):
             '/help/',
             '/privacy/',
             '/terms/',
+            '/admin/login/',
             '',
         ]
 
